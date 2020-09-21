@@ -1,0 +1,61 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title>Question paraphrasing</title>
+    <style>
+        .center {
+            text-align: center;
+            margin-top: 10%;
+        }
+        center {
+            margin-top: 10%;
+        }
+        .questionInput {
+            width: 250px;
+            height: 30px;
+            border-radius: 0.50em;
+        }
+        button {
+            margin-top: 1%;
+            border-radius: 0.25em;
+        }
+        #wait {
+            visibility: hidden;
+        }
+    </style>
+</head> 
+<body>
+    <div class="center">
+        <input id="questionInput" class="questionInput" placeholder="Enter Question" />
+        <br />
+        <button id="generateButton">Generate More questions</button>
+        <center>
+            <p id="wait">Please wait...</p>
+            <div>
+                <table>
+                </table>
+            </div>
+        </center>
+    </div>
+    <script>
+        const host = "";
+        document.getElementById("generateButton").addEventListener("click", async () => {
+            const question = document.getElementById("questionInput").value;
+
+            if(!question) alert("Question field cannot be bank");
+            else {
+                document.getElementById("wait").style.visibility = "visible";
+                const res = await fetch(`${host}/questions?q=${question}`);
+                const questions = await res.json();
+
+                console.log(questions);
+                document.getElementById("wait").style.visibility = "hidden";
+                const table = document.querySelector("table");
+                questions.forEach(element => {
+                    table.innerHTML += `<tr><td>${element}</td></tr>`;
+                });
+            }
+        })
+    </script>
+</body>
+</html>
