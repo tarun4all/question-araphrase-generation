@@ -45,8 +45,15 @@
             if(!question) alert("Question field cannot be bank");
             else {
                 document.getElementById("wait").style.visibility = "visible";
-                const res = await fetch(`${host}/questions?q=${question}`);
-                const questions = await res.json();
+                const res = await fetch('/questions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({q: question}),
+                    // body: `para=${document.getElementById("para").value}`
+                });
+                const questions = await response.json();
 
                 console.log(questions);
                 document.getElementById("wait").style.visibility = "hidden";

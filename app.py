@@ -9,10 +9,10 @@ CORS(app)
 def home():
     return render_template("index.html")
 
-@app.route("/questions")
+@app.route("/questions", methods = ['POST'])
 def questions():
-  question = request.args.get('q')
-  questions = generateQuestions(question)
+  requestData = request.get_json()
+  questions = generateQuestions(requestData['q'])
   return jsonify(questions)
   
 app.run()
