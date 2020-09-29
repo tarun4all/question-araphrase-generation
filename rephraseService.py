@@ -9,7 +9,7 @@ def set_seed(seed):
 
 set_seed(42)
 
-model = T5ForConditionalGeneration.from_pretrained('./t5_paraphraser')
+model = T5ForConditionalGeneration.from_pretrained('./dataset/t5_paraphraser')
 tokenizer = T5Tokenizer.from_pretrained('t5-base')
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
